@@ -7,12 +7,20 @@ export default function Home() {
   const canvas = useRef();
   let ctx = null;
   let size = 600;
+  let inter;
 
   const [number, setNumber] = useState(1);
 
   const handleInput = (e) => {
     setNumber(e.target.value)
+    clearInterval(inter)
   }
+
+  useEffect(() =>{
+    ctx = canvas.current.getContext("2d")
+    ctx.translate(200, canvas.current.height / 1.2)
+    ctx.scale(1, -1);
+  }, [])
 
   useEffect(() => {
     const array = createTriangle(number, 1);
@@ -23,18 +31,34 @@ export default function Home() {
     ctx.lineWidth = line.width;
 
     ctx.clearRect(0, 0, canvas.current.width, canvas.current.height)
-    ctx.translate(canvas.current.width / 5, canvas.current.height / 1.2)
+
     
-    ctx.scale(1, -1);
     ctx.beginPath();
     ctx.moveTo(0, 0);
-    for (let i = 0; i < array.length; i++) {
-      ctx.lineTo(array[i][0] * newSize, array[i][1] * newSize);
-    }
-    ctx.closePath();
+
+    let count = 1
+    inter = setInterval(function(){
+      ctx.lineTo(array[count][0] * newSize, array[count][1] * newSize)
+      ctx.stroke();
+      count++;
+      if (count >= array.length){
+        clearInterval(inter);
+      }
+      console.log(count);
+    }, 2000 / Math.pow(2, number * 2))
+    // ctx.translate(0, -canvas.current.height / 2 )
+    // ctx.scale(1, -1)
+
+
     ctx.stroke();
-    ctx.translate(-canvas.current.width / 5, canvas.current.height / 1.2 )
-    ctx.scale(1, -1)
+
+    // for (let i = 0; i < array.length; i++) {
+    //   ctx.lineTo(array[i][0] * newSize, array[i][1] * newSize);
+    // }
+    // ctx.closePath();
+    // ctx.stroke();
+    // ctx.translate(0, canvas.current.height / 2)
+    // ctx.scale(1, -1)
 
   }, [number])
 
@@ -48,7 +72,8 @@ export default function Home() {
             min="1"
             max="10"
             onChange={handleInput}
-            value = {number}/>
+            value = {number}
+            className="outline-none p-1"/>
           <canvas ref={canvas} height="800" width="1000" className="bg-black p-[50px] rounded-[8px] mt-10"></canvas>
         </div>
       </div>
