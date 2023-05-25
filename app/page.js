@@ -6,7 +6,6 @@ import {useRef, useEffect, useState} from 'react'
 export default function Home() {
   const canvas = useRef();
   let ctx = null;
-  let size = 600;
   let inter;
 
   const [number, setNumber] = useState(1);
@@ -24,7 +23,7 @@ export default function Home() {
 
   useEffect(() => {
     const array = createTriangle(number, 1);
-    let newSize = size / (Math.pow(2, number))
+    let size = 600 / (Math.pow(2, number))
     ctx = canvas.current.getContext("2d")
     const line = {color: 'white', width: 10 / (number * 2)}
     ctx.strokeStyle = line.color;
@@ -38,7 +37,7 @@ export default function Home() {
 
     let count = 1
     inter = setInterval(function(){
-      ctx.lineTo(array[count][0] * newSize, array[count][1] * newSize)
+      ctx.lineTo(array[count][0] * size, array[count][1] * size)
       ctx.stroke();
       count++;
       if (count >= array.length){
