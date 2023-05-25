@@ -45,7 +45,7 @@ export default function Home() {
         clearInterval(inter);
       }
       console.log(count);
-    }, 300 / Math.pow(number, number ))
+    }, 300 / Math.pow(number, number * number))
     // ctx.translate(0, -canvas.current.height / 2 )
     // ctx.scale(1, -1)
 
