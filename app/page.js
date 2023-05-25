@@ -25,7 +25,7 @@ export default function Home() {
     const array = createTriangle(number, 1);
     let size = 600 / (Math.pow(2, number))
     ctx = canvas.current.getContext("2d")
-    const line = {color: 'white', width: 10 / (number * 2)}
+    const line = {color: 'yellow', width: 10 / (number * 2)}
     ctx.strokeStyle = line.color;
     ctx.lineWidth = line.width;
 
@@ -59,17 +59,20 @@ export default function Home() {
 
   return (
     <div className="fixed bg-slate-500 h-screen w-screen">
-      <div className="flex-col mt-[50px] ml-[50px] mr-[50px] h-full">
-        <h className="font-semibold text-[60px] text-white">Sierpinski</h>
+      <div className="flex flex-col mt-[50px] ml-[50px] mr-[50px] h-full items-center">
+        <h className="font-semibold text-[60px] text-white">Sierpinski Triangle</h>
+        <p className="text-center text-[yellow]">The Sierpinski triangle is a self-similar fractal. 
+        It consists of an equilateral triangle, with smaller equilateral triangles recursively removed from its remaining area, 
+        which is named after the Polish mathematician Wacław Sierpiński.</p>
         <div className="flex flex-col h-full w-full items-center mt-[20px]">
+          <canvas ref={canvas} height="800" width="1000" className="bg-black p-[50px] rounded-[8px] mt-10"></canvas>
           <input
             type="number"
             min="1"
             max="10"
             onChange={handleInput}
             value = {number}
-            className="outline-none p-1"/>
-          <canvas ref={canvas} height="800" width="1000" className="bg-black p-[50px] rounded-[8px] mt-10"></canvas>
+            className="outline-none p-1 rounded-[8px] mt-5"/>
         </div>
       </div>
     </div>
