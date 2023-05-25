@@ -46,10 +46,6 @@ export default function Home() {
       }
       console.log(count);
     }, 300 / Math.pow(number, number * number))
-    // ctx.translate(0, -canvas.current.height / 2 )
-    // ctx.scale(1, -1)
-
-
     ctx.stroke();
 
     // for (let i = 0; i < array.length; i++) {
