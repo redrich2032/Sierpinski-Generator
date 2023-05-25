@@ -26,7 +26,7 @@ export default function Home() {
     const array = createTriangle(number, 1);
     let newSize = size / (Math.pow(2, number))
     ctx = canvas.current.getContext("2d")
-    const line = {color: 'white', width: 2}
+    const line = {color: 'white', width: 10 / (number * 2)}
     ctx.strokeStyle = line.color;
     ctx.lineWidth = line.width;
 
@@ -45,7 +45,7 @@ export default function Home() {
         clearInterval(inter);
       }
       console.log(count);
-    }, 2000 / Math.pow(2, number * 2))
+    }, 300 / Math.pow(number, number ))
     // ctx.translate(0, -canvas.current.height / 2 )
     // ctx.scale(1, -1)
 
