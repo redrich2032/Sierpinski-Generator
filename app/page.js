@@ -7,7 +7,6 @@ export default function Home() {
   const canvas = useRef();
   let ctx = null;
   let size = 600;
-  let n = 2;
 
   const [number, setNumber] = useState(1);
 
@@ -19,16 +18,16 @@ export default function Home() {
     const array = createTriangle(number, 1);
     let newSize = size / (Math.pow(2, number))
     ctx = canvas.current.getContext("2d")
-    ctx.translate(canvas.current.width / 5, canvas.current.height / 1.2)
-    ctx.scale(1, -1);
-
     const line = {color: 'white', width: 2}
-
-    ctx.clearRect(0, 0, canvas.current.width, canvas.current.height)
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
     ctx.strokeStyle = line.color;
     ctx.lineWidth = line.width;
+
+    ctx.clearRect(0, 0, canvas.current.width, canvas.current.height)
+    ctx.translate(canvas.current.width / 5, canvas.current.height / 1.2)
+    
+    ctx.scale(1, -1);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
     for (let i = 0; i < array.length; i++) {
       ctx.lineTo(array[i][0] * newSize, array[i][1] * newSize);
     }
