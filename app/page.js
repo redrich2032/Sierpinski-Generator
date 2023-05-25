@@ -60,7 +60,7 @@ export default function Home() {
   return (
     <div className="fixed bg-slate-500 h-screen w-screen">
       <div className="flex flex-col mt-[50px] ml-[50px] mr-[50px] h-full items-center">
-        <h className="font-semibold text-[60px] text-white">Sierpinski Triangle</h>
+        <h className="font-semibold text-[60px] text-white">Sierpiński Triangle</h>
         <p className="text-center text-[yellow]">The Sierpinski triangle is a self-similar fractal. 
         It consists of an equilateral triangle, with smaller equilateral triangles recursively removed from its remaining area, 
         which is named after the Polish mathematician Wacław Sierpiński.</p>
