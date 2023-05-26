@@ -43,7 +43,6 @@ export default function Home() {
       if (count >= array.length){
         clearInterval(inter);
       }
-      console.log(count);
     }, 300 / Math.pow(number, number * number))
     ctx.stroke();
 
