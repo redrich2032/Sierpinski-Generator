@@ -72,7 +72,7 @@ export default function Home() {
             max="10"
             onChange={handleInput}
             value = {number}
-            className="outline-none p-1 rounded-[8px] mt-5"/>
+            className="outline-none p-1 rounded-[8px] mt-[-100px]"/>
         </div>
       </div>
     </div>
