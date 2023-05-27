@@ -9,9 +9,22 @@ export default function Home() {
   let inter;
 
   const [number, setNumber] = useState(1);
+  const [animText, setAnimText] = useState("ON");
+  const [animColor, setAnimColor] = useState("bg-green-500");
 
   const handleInput = (e) => {
     setNumber(e.target.value);
+    clearInterval(inter);
+  };
+
+  const handleAnimButton = () => {
+    if (animText === "ON") {
+      setAnimText("OFF");
+      setAnimColor("bg-red-500");
+    } else {
+      setAnimText("ON");
+      setAnimColor("bg-green-500");
+    }
     clearInterval(inter);
   };
 
@@ -28,31 +41,28 @@ export default function Home() {
     const line = { color: "yellow", width: 10 / (number * 2) };
     ctx.strokeStyle = line.color;
     ctx.lineWidth = line.width;
-
     ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
-
     ctx.beginPath();
     ctx.moveTo(0, 0);
 
-    let count = 1;
-    inter = setInterval(function () {
-      ctx.lineTo(array[count][0] * size, array[count][1] * size);
-      ctx.stroke();
-      count++;
-      if (count >= array.length) {
-        clearInterval(inter);
+    if (animText === "ON") {
+      let count = 1;
+      inter = setInterval(function () {
+        ctx.lineTo(array[count][0] * size, array[count][1] * size);
+        ctx.stroke();
+        count++;
+        if (count >= array.length) {
+          clearInterval(inter);
+        }
+      }, 300 / Math.pow(number, number * number));
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        ctx.lineTo(array[i][0] * size, array[i][1] * size);
       }
-    }, 300 / Math.pow(number, number * number));
+      ctx.closePath();
+    }
     ctx.stroke();
-
-    // for (let i = 0; i < array.length; i++) {
-    //   ctx.lineTo(array[i][0] * newSize, array[i][1] * newSize);
-    // }
-    // ctx.closePath();
-    // ctx.stroke();
-    // ctx.translate(0, canvas.current.height / 2)
-    // ctx.scale(1, -1)
-  }, [number]);
+  }, [number, animText]);
 
   return (
     <div className=" bg-slate-500 h-fit w-screen">
@@ -79,8 +89,17 @@ export default function Home() {
             max="10"
             onChange={handleInput}
             value={number}
-            className="outline-none p-1 rounded-[8px] mt-[-100px] mb-[100px] text-black"
+            className="outline-none p-1 rounded-[8px] mt-[-100px] mb-[10px] text-black"
           />
+          <div className="flex h-fit w-fit mb-[90px] items-center">
+            <text>Animation:</text>
+            <button
+              onClick={handleAnimButton}
+              className={`ml-2 p-1 rounded-[8px] ${animColor}`}
+            >
+              {animText}
+            </button>
+          </div>
         </div>
       </div>
     </div>
